@@ -14,6 +14,10 @@ import java.nio.file.Paths;
 public class ConfigManager {
 	private static final String CONFIG_FILE_PATH = "src/main/resources/io/github/asbyx/autonomousstreamset/config/config.json";
 
+	/**
+	 * Reads the config file and returns an array of strings containing the stream name, API token, tournament slug, and event slug
+	 * @return String[] {stream name, API token, tournament slug, event slug}
+	 */
 	public static String[] readConfig() {
 		try {
 			String content = new String(Files.readAllBytes(Paths.get(CONFIG_FILE_PATH)));
