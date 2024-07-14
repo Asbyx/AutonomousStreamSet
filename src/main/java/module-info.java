@@ -9,4 +9,6 @@ module io.github.asbyx.autonomousstreamset {
 
 	opens io.github.asbyx.autonomousstreamset to javafx.fxml;
 	exports io.github.asbyx.autonomousstreamset;
+	exports io.github.asbyx.autonomousstreamset.controllers;
+	opens io.github.asbyx.autonomousstreamset.controllers to javafx.fxml;
 }

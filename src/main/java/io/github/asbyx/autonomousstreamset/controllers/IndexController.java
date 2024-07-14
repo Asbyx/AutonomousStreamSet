@@ -1,5 +1,6 @@
-package io.github.asbyx.autonomousstreamset;
+package io.github.asbyx.autonomousstreamset.controllers;
 
+import io.github.asbyx.autonomousstreamset.Main;
 import io.github.asbyx.autonomousstreamset.config.ConfigManager;
 
 import javafx.event.ActionEvent;
@@ -24,7 +25,7 @@ public class IndexController {
 		// use the ConfigManager class to write the config file
 		ConfigManager.writeConfig(streamName.getText(), APIToken.getText(), tournamentSlug.getText(), eventSlug.getText());
 
-		//todo: start the app
+		Main.switchScene("running.fxml");
 	}
 
 	@FXML

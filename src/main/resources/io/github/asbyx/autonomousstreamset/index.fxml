@@ -7,7 +7,7 @@
 
 <?import javafx.scene.control.Button?>
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="io.github.asbyx.autonomousstreamset.IndexController">
+      fx:controller="io.github.asbyx.autonomousstreamset.controllers.IndexController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
@@ -15,7 +15,7 @@
     <Label text="Autonomous Stream Set" style="-fx-font-size: 24px;"/>
 
 <!--    Fields for the config elements    -->
-    <Label text="Config" style="-fx-font-size: 18px;"/>
+    <Label text="Configuration" style="-fx-font-size: 18px;"/>
     <VBox spacing="10.0">
         <Label text="Stream Name"/>
         <TextField fx:id="streamName" promptText="Stream name"/>
