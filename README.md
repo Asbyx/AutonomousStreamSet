@@ -3,11 +3,19 @@ Les noms sur la scène OBS sont mis automatiquement à jour à partir des infos 
 Le score est mis à jour automatiquement (Aussi sur start gg ! Même avec les personnages !) à partir d'une analyse du flux vidéo du stream.
 
 ### Roadmap:
-- UI pour set les infos
+- UI pour set la config [OK]
     - config.json                           [OK]
     - lecture des valeurs actuelles         [OK]
-    - création de la fenêtre de l'appli
+    - création de la fenêtre de l'appli     [OK]  
+
+
 - Get le stream set
+  - Initialisation du client
+  - Query de l'event
+  - Query du streamed set
+  - UI
+ 
+
 - Reconnaissance des persos et du vainqueur
     - get le flux (penser aux façons différentes dont ça pourrait être fait !)
     - attendre qu'un match se lance
