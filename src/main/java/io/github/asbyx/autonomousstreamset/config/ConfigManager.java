@@ -20,20 +20,22 @@ public class ConfigManager {
 			String content = new String(Files.readAllBytes(Paths.get(CONFIG_FILE_PATH)));
 			JSONObject jsonObject = new JSONObject(content);
 
+			String streamName = jsonObject.getString("stream_name");
 			String apiToken = jsonObject.getString("api_token");
 			String tournamentSlug = jsonObject.getString("tournament_slug");
 			String eventSlug = jsonObject.getString("event_slug");
 
-			return new String[]{apiToken, tournamentSlug, eventSlug};
+			return new String[]{streamName, apiToken, tournamentSlug, eventSlug};
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
 
-	public static void writeConfig(String apiToken, String tournamentSlug, String eventSlug) {
+	public static void writeConfig(String streamName, String apiToken, String tournamentSlug, String eventSlug) {
 		try {
 			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("stream_name", streamName);
 			jsonObject.put("api_token", apiToken);
 			jsonObject.put("tournament_slug", tournamentSlug);
 			jsonObject.put("event_slug", eventSlug);
