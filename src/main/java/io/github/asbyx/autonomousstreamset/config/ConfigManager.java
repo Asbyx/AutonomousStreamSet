@@ -26,9 +26,9 @@ public class ConfigManager {
 			String eventSlug = jsonObject.getString("event_slug");
 
 			return new String[]{streamName, apiToken, tournamentSlug, eventSlug};
-		} catch (IOException e) {
+		} catch (IOException e) { //todo: errors handling (file not found, wrong format, etc.)
 			e.printStackTrace();
-			return null;
+			return new String[]{"", "", "", ""};
 		}
 	}
 
