@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.Button?>
@@ -11,6 +12,23 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
+    <Label text="Autonomous Stream Set" style="-fx-font-size: 24px;"/>
+
+<!--    Fields for the config elements    -->
+    <Label text="Config" style="-fx-font-size: 18px;"/>
+    <VBox spacing="10.0">
+        <Label text="Stream Name"/>
+        <TextField fx:id="streamName" promptText="Stream name"/>
+
+        <Label text="API token"/>
+        <TextField fx:id="APIToken" promptText="API token"/>
+
+        <Label text="Tournament slug"/>
+        <TextField fx:id="tournamentSlug" promptText="Tournament Slug"/>
+
+        <Label text="Event slug"/>
+        <TextField fx:id="eventSlug" promptText="Event Slug"/>
+    </VBox>
+
+    <Button onAction="#start" text="Start" />
 </VBox>
