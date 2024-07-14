@@ -65,7 +65,7 @@ public class GraphQLManagerTest {
 
 	@Test
 	public void testCorrect() {
-		GraphQLManager.setApiToken("239d4a6cf1f26bb860e673f023dc27b9");
+		GraphQLManager.setApiToken("specify here your token");
 
 		String query = "query getEventId($tournament: String){\n" +
 				"          tournament(slug: $tournament){\n" +
