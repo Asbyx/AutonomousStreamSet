@@ -10,10 +10,10 @@ Le score est mis à jour automatiquement (Aussi sur start gg ! Même avec les pe
 
 
 - Get le stream set
-  - Initialisation du client
-  - Query de l'event
-  - Query du streamed set
-  - UI
+  - Initialisation du client [OK]
+  - Query de l'event [OK]
+  - Query du streamed set [OK]
+  - UI (ui propre + boucles infinies de la query)
  
 
 - Reconnaissance des persos et du vainqueur
