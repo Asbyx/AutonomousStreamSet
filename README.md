@@ -4,8 +4,8 @@ Le score est mis à jour automatiquement (Aussi sur start gg ! Même avec les pe
 
 ### Roadmap:
 - UI pour set les infos
-    - config.json OK
-    - lecture des valeurs actuelles
+    - config.json                           [OK]
+    - lecture des valeurs actuelles         [OK]
     - création de la fenêtre de l'appli
 - Get le stream set
 - Reconnaissance des persos et du vainqueur
