@@ -4,7 +4,7 @@ Le score est mis à jour automatiquement (Aussi sur start gg ! Même avec les pe
 
 ### Roadmap:
 - UI pour set les infos
-    - config.json
+    - config.json OK
     - lecture des valeurs actuelles
     - création de la fenêtre de l'appli
 - Get le stream set

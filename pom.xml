@@ -42,6 +42,11 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.17-R0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>
