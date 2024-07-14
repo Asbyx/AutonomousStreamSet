@@ -1,7 +1,6 @@
 package io.github.asbyx.autonomousstreamset.config;
 
 import org.json.JSONObject;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
