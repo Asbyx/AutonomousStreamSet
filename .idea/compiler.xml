@@ -9,8 +9,5 @@
         <module name="AutonomousStreamSet" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="AutonomousStreamSet" target="0" />
-    </bytecodeTargetLevel>
   </component>
 </project>

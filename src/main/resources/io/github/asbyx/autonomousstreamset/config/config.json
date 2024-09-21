@@ -1,6 +1,6 @@
 {
-    "stream_name": "myawesomestream",
-    "tournament_slug": "pound-2022",
-    "api_token": "000000000000000000000000000000000000",
+    "stream_name": "ebou_pese",
+    "tournament_slug": "test-api-3",
+    "api_token": "239d4a6cf1f26bb860e673f023dc27b9",
     "event_slug": "ultimate-singles"
 }

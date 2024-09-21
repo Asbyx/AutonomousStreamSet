@@ -14,14 +14,16 @@ Le score est mis à jour automatiquement (Aussi sur start gg ! Même avec les pe
   - Query de l'event [OK]
   - Query du streamed set [OK]
   - UI (ui propre + boucles infinies de la query)
- 
+
+
+- Update des assets obs  
+
 
 - Reconnaissance des persos et du vainqueur
     - get le flux (penser aux façons différentes dont ça pourrait être fait !)
     - attendre qu'un match se lance
     - process les stocks pour get les personnages
     - quand un des deux a plus de stocks -> vainqueur détecté
-- Update des assets obs
 - Requetes pour mutate le set
 
 

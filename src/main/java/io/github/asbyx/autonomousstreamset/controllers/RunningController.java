@@ -2,47 +2,106 @@ package io.github.asbyx.autonomousstreamset.controllers;
 
 import io.github.asbyx.autonomousstreamset.Main;
 import io.github.asbyx.autonomousstreamset.config.ConfigManager;
+import io.github.asbyx.autonomousstreamset.obs_files.OBSFilesUpdater;
 import io.github.asbyx.autonomousstreamset.queries.GraphQLManager;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.Arrays;
+import java.time.LocalTime;
 import java.util.Map;
 import java.util.Objects;
 
 public class RunningController {
-
-
 	@FXML
 	public Text status;
 	@FXML
 	public Text logs;
 
-	//todo
+	private Integer eventId;
+	private String[] config;
+	private final Thread streamInfoThread = new Thread(() -> {
+		// call "getStreamedSet" every 2 seconds
+		LocalTime lastUpdate = LocalTime.now();
+		while (true) {
+			String time = java.time.LocalTime.now().format(java.time.format.DateTimeFormatter.ofPattern("HH:mm:ss"));
+
+			String[] set = getStreamedSet(eventId, config[0]);
+			if (set != null) {
+				// logs
+				updateLogs("[" + time + "] Streamed set found !");
+
+				// update the files
+				String error = OBSFilesUpdater.updateFiles(set);
+				if (error == null) {
+					status.setText("Updater running correctly !");
+					lastUpdate = LocalTime.now();
+				}
+				else {
+					status.setText("Error with the file updater.");
+					updateLogs(error);
+				}
+			} else {
+				updateLogs("[" + time + "] No streamed set found. Can take up to 1 minute.");
+				// if the last update was more than 1 minute ago, display an error
+				if (LocalTime.now().minusMinutes(1).isAfter(lastUpdate)) {
+					status.setText("Troubles getting the streamed set...");
+					updateLogs("No streamed set found for more than 1 minute. \n" +
+							"Check on start.gg that you have launched the streamed set with the stream named \"" + config[0] + "\".\n" +
+							"[" + time + "] No streamed set found.");
+				}
+			}
+
+			// wait 2 seconds
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				break;
+			}
+		}
+	});
+
 	public void updateLogs(String log) {
-		logs.setText(logs.getText() + "\n" + log);
+		logs.setText(log);
 	}
 
 	@FXML
 	public void back() {
+		close();
 		Main.switchScene("index.fxml");
 	}
 
+	/**
+	 * Handles the close of the application.
+	 */
+	@FXML
+	public void close() {
+		streamInfoThread.interrupt();
+		OBSFilesUpdater.close();
+		System.out.println("Scene correctly closed");
+	}
+
+
+	/**
+	 * Initializes the controller.
+	 */
 	@FXML
 	public void initialize() {
+		OBSFilesUpdater.start();
+
 		// launch a thread to get the event id
 		new Thread(() -> {
-			String[] config = ConfigManager.readConfig();
+			config = ConfigManager.readConfig();
 			GraphQLManager.setApiToken(config[1]);
 
-			Integer eventId = getEventId(config[2], config[3]);
+			eventId = getEventId(config[2], config[3]);
 			if (eventId == null) return;
 			updateLogs("Event found ! ID: " + eventId);
 
-
+			status.setText("Getting streamed set...");
+			// launches the thread that will get information from the streamed set.
+			streamInfoThread.start();
 		}).start();
 	}
 
@@ -52,7 +111,7 @@ public class RunningController {
 				query getEventId($tournament: String){
 				          tournament(slug: $tournament){
 				            events {
-				                name
+				                slug
 				                id
 				            }
 				          }
@@ -81,7 +140,7 @@ public class RunningController {
 		Integer eventId = null;
 		for (int i = 0; i < events.length(); i++) {
 			JSONObject event = events.getJSONObject(i);
-			if (event.getString("name").equals(eventSlug)) {
+			if (event.getString("slug").substring(event.getString("slug").lastIndexOf("/") + 1).equals(eventSlug)) {
 				eventId = event.getInt("id");
 				break;
 			}
@@ -89,6 +148,7 @@ public class RunningController {
 
 		if (eventId == null) {
 			status.setText("Error");
+			updateLogs(events.toString());
 			updateLogs("Event not found. Check the if the configurations are correct.");
 			return null;
 		}
@@ -124,7 +184,7 @@ public class RunningController {
 				            }
 				        }
 				    }
-				    """;
+				""";
 		Map<String, String> variables = Map.of("id", eventId.toString());
 
 		String response;
@@ -146,7 +206,7 @@ public class RunningController {
 
 		// check if a streamed set is found
 		JSONArray sets = json.getJSONObject("event").getJSONObject("sets").getJSONArray("nodes");
-		if (sets.length() == 0) {
+		if (sets.isEmpty()) {
 			updateLogs("No streamed set found.");
 			return null;
 		}
