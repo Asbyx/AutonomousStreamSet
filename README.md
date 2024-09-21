@@ -15,9 +15,7 @@ Le score est mis à jour automatiquement (Aussi sur start gg ! Même avec les pe
   - Query du streamed set [OK]
   - UI (ui propre + boucles infinies de la query)
 
-
-- Update des assets obs  
-
+- Update des assets obs [OK]
 
 - Reconnaissance des persos et du vainqueur
     - get le flux (penser aux façons différentes dont ça pourrait être fait !)
